@@ -24,7 +24,7 @@ app.post("/attest", (req, res) => {
       let reason = "OK";
 
       try {
-        // 🔒 Replay protection (5 minutes)
+       
         const now = Date.now();
         if (!timestamp || now - timestamp > 5 * 60 * 1000) {
           return {

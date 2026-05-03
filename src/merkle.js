@@ -1,20 +1,14 @@
 const crypto = require("crypto");
 
-// ==========================
-// 🔐 CONFIG
-// ==========================
+
 const HASH_ALGO = "sha256";
 
-// ==========================
-// 🔐 HASH FUNCTION
-// ==========================
+
 function hash(data) {
   return crypto.createHash(HASH_ALGO).update(data).digest("hex");
 }
 
-// ==========================
-// 🔐 DOMAIN SEPARATION
-// ==========================
+
 function hashLeaf(data) {
   return hash("LEAF:" + data);
 }
@@ -23,15 +17,13 @@ function hashNode(left, right) {
   return hash("NODE:" + left + right);
 }
 
-// ==========================
-// 🌳 BUILD MERKLE TREE
-// ==========================
+
 function buildMerkleTree(leaves) {
   if (!Array.isArray(leaves) || leaves.length === 0) {
     throw new Error("No leaves provided for Merkle Tree");
   }
 
-  // Deterministic ordering
+  
   let level = leaves.map(hashLeaf).sort();
 
   const tree = [level];
@@ -41,7 +33,7 @@ function buildMerkleTree(leaves) {
 
     for (let i = 0; i < level.length; i += 2) {
       const left = level[i];
-      const right = level[i + 1] || left; // duplicate if odd
+      const right = level[i + 1] || left; 
 
       const parent = hashNode(left, right);
       nextLevel.push(parent);
@@ -57,9 +49,7 @@ function buildMerkleTree(leaves) {
   };
 }
 
-// ==========================
-// 📜 GENERATE MERKLE PROOF
-// ==========================
+
 function getMerkleProof(tree, index) {
   if (!tree || tree.length === 0) {
     throw new Error("Invalid Merkle tree");
@@ -86,9 +76,7 @@ function getMerkleProof(tree, index) {
   return proof;
 }
 
-// ==========================
-// 🔍 VERIFY MERKLE PROOF
-// ==========================
+
 function verifyMerkleProof(leafData, proof, root) {
   if (!Array.isArray(proof)) return false;
 
@@ -109,9 +97,7 @@ function verifyMerkleProof(leafData, proof, root) {
   return computedHash === root;
 }
 
-// ==========================
-// 🌍 EXPORTS
-// ==========================
+
 module.exports = {
   buildMerkleTree,
   getMerkleProof,

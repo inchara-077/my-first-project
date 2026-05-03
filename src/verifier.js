@@ -1,27 +1,22 @@
 const nacl = require("tweetnacl");
 const util = require("tweetnacl-util");
 
-// 🔐 Single proof verification
+
 function verifySignature(data, signature, publicKey) {
-  try {
-    const message = JSON.stringify(data);
+  const message = JSON.stringify(data);
 
-    const messageUint8 = util.decodeUTF8(message);
-    const signatureUint8 = util.decodeBase64(signature);
-    const publicKeyUint8 = util.decodeBase64(publicKey);
+  const messageUint8 = util.decodeUTF8(message);
+  const signatureUint8 = util.decodeBase64(signature);
+  const publicKeyUint8 = util.decodeBase64(publicKey);
 
-    return nacl.sign.detached.verify(
-      messageUint8,
-      signatureUint8,
-      publicKeyUint8
-    );
-  } catch (err) {
-    console.error("Verification error:", err);
-    return false;
-  }
+  return nacl.sign.detached.verify(
+    messageUint8,
+    signatureUint8,
+    publicKeyUint8
+  );
 }
 
-// 🔥 Batch verification (THIS WAS MISSING)
+
 function verifyProofs(proofs) {
   const results = proofs.map((proof, index) => {
     const isValid = verifySignature(
@@ -48,7 +43,7 @@ function verifyProofs(proofs) {
   };
 }
 
-// ✅ EXPORT BOTH
+
 module.exports = {
   verifySignature,
   verifyProofs

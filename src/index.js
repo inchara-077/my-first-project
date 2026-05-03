@@ -1,22 +1,16 @@
 const crypto = require("crypto");
 
-/**
- * Canonical JSON (stable ordering)
- */
+
 function canonicalize(obj) {
   return JSON.stringify(obj, Object.keys(obj).sort());
 }
 
-/**
- * SHA256 hash
- */
+
 function sha256(data) {
   return crypto.createHash("sha256").update(data).digest("hex");
 }
 
-/**
- * Build Merkle Tree (sorted pairing)
- */
+
 function buildMerkleTree(hashes) {
   let levels = [];
   levels.push(hashes);
@@ -44,9 +38,7 @@ function buildMerkleTree(hashes) {
   };
 }
 
-/**
- * Generate Merkle Proof
- */
+
 function getMerkleProof(index, levels) {
   let proof = [];
 
@@ -68,9 +60,7 @@ function getMerkleProof(index, levels) {
   return proof;
 }
 
-/**
- * MAIN ENGINE
- */
+
 function processProofs(proofs) {
   const results = [];
 
@@ -100,11 +90,11 @@ function processProofs(proofs) {
     });
   }
 
-  // Build Merkle Tree
+  
   const hashes = results.map(r => r.hash);
   const tree = buildMerkleTree(hashes);
 
-  // Attach proofs
+  
   results.forEach((r, i) => {
     r.merkle_proof = getMerkleProof(i, tree.levels);
   });

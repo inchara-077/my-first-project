@@ -1,14 +1,14 @@
 const axios = require("axios");
 
-// 🔥 PASTE YOUR GENERATED PROOF HERE
+
 const proof = {
   "proof_id": "101",
   "data": {
-    "temperature": 28
+    "temperature": 999
   },
-  "signature": "0V/l3ViQoSFe43KkNSzd/e3L2TR0AKUccO8bi5SpUNwVl5uXGVMSZigrEwumrAWnMVWo9AtmEfRWJX4mXHFrBg==",
-  "public_key": "+6hacjXKZTe2xdFAgvxtxoPBeFjwNx90sXqrXsHZeQQ=",
-  "timestamp": 1777809569691
+  "signature": "aJOlKJUBlWvRacJI9Y5PYumYBjEuUHMBtdzudElPhJHCSOcgolNqzBNXOAxePbEH+4ZzIysAY4mjctNM/YTADQ==",
+  "public_key": "CohPcacujMyaH2YFjeLJVFE6KH4zlBjuMn8xhDu/40o=",
+  "timestamp": 1777812773134
 };
 
 async function test() {

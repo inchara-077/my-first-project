@@ -1,6 +1,6 @@
 const { verifyProof } = require("./verifier");
 
-// 👇 COPY ONE RESULT FROM YOUR TERMINAL OUTPUT
+
 const testInput = {
   canonical: {
     data: { temperature: 28 },
