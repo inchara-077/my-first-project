@@ -1,0 +1,14 @@
+[
+  {
+    "proof_id": "101",
+    "source": "sensor_A",
+    "timestamp": "2026-05-02T11:00:00Z",
+    "data": { "temperature": 28 }
+  },
+  {
+    "proof_id": "102",
+    "source": "robot_X",
+    "timestamp": "2026-05-02T11:05:00Z",
+    "data": { "action": "move_forward" }
+  }
+]
