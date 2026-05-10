@@ -1,0 +1,20 @@
+{
+    "canonical": {
+        "proof_id": "101",
+        "source": "sensor_A",
+        "timestamp": 1778420855833,
+        "data": {
+            "temperature": 28
+        }
+    },
+    "hash": "177ffc8a53bdbd094904e3617bbab57cf0a5769c28a7e12ab4ac6aaab78b6bfa",
+    "signature": "demo-signature",
+    "public_key": "demo-public-key",
+    "merkle_proof": [
+        {
+            "position": "right",
+            "hash": "545ea538461003efdc8c81c244531b003f6f26cfccf6c0073b3239fdedf49446"
+        }
+    ],
+    "merkle_root": "93382b6090f6138f0286642a1178eeaf3e3b67047e69191a32be4f44017b8247"
+}

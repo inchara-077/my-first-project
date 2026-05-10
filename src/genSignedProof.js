@@ -1,40 +1,40 @@
-const nacl = require("tweetnacl");
-const util = require("tweetnacl-util");
+const fs = require("fs");
+const crypto = require("crypto");
 
+function sha256(data) {
+    return crypto.createHash("sha256").update(data).digest("hex");
+}
 
-const keyPair = nacl.sign.keyPair();
-
-const publicKeyBase64 = util.encodeBase64(keyPair.publicKey);
-const secretKey = keyPair.secretKey;
-
-
-const data = {
-  temperature: 28
+const canonical = {
+    proof_id: "101",
+    source: "sensor_A",
+    timestamp: Date.now(),
+    data: {
+        temperature: 28
+    }
 };
 
-const timestamp = Date.now();
-
-
-const message = JSON.stringify(data);
-
-
-const signature = nacl.sign.detached(
-  util.decodeUTF8(message),
-  secretKey
+const hash = sha256(
+    JSON.stringify(canonical)
 );
 
-
-const signatureBase64 = util.encodeBase64(signature);
-
-
 const proof = {
-  proof_id: "101",
-  data,
-  signature: signatureBase64,
-  public_key: publicKeyBase64,
-  timestamp
+    canonical,
+    hash,
+    signature: "demo-signature",
+    public_key: "demo-public-key",
+    merkle_proof: [
+        {
+            position: "right",
+            hash: sha256("node")
+        }
+    ],
+    merkle_root: sha256(hash)
 };
 
+fs.writeFileSync(
+    "./src/generatedProof.json",
+    JSON.stringify(proof, null, 4)
+);
 
-console.log("\n🔥 GENERATED PROOF:\n");
-console.log(JSON.stringify(proof, null, 2));
+console.log("✅ generatedProof.json created");
